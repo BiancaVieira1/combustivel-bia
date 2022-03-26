@@ -5,24 +5,35 @@ export default function App() {
   const [valor1, setValor1] = useState();
   const [valor2, setValor2] = useState();
   const [resultado, setResultado] = useState(0);
+  const [mensagem, Mensagem] = useState();
 
-  function calcular(){
-    setResultado(parseFloat(valor1) / parseFloat(valor2));
+  function dividir(){
+    let diferenca = (parseFloat(valor1) / parseFloat(valor2));
+    setResultado(parseFloat(valor1) / parseFloat(valor2)); 
+
+    if(diferenca <= 0.7){
+      Mensagem("Abasteça com álcool");
+    }
+    else 
+    {
+      Mensagem("Abasteça com gasolina");
+    }
   }
-  
+
   return (
     <View style={styles.container}>
-      <Text style={styles.texto}>Calcular Gasolina</Text>  <p>
+      <Text style={styles.texto}>Gasolina ou Álcool</Text>
+      <p>
 
       </p>
-        <Image
+      <Image
         style={styles.logo}
         source={{
-          uri: 'https://cdn-icons-png.flaticon.com/512/784/784867.png',
+          uri: 'https://cdn-icons-png.flaticon.com/512/224/224480.png',
         }}
       />
       <View style={styles.bloco}>
-        <Text style={styles.textoBloco}>Valor Álcool</Text>
+        <Text style={styles.textoBloco}>Digite o valor do Álcool: </Text>
         <TextInput 
           style={styles.input}
           keyboardType="numeric"
@@ -31,7 +42,7 @@ export default function App() {
         />
       </View>
       <View style={styles.bloco}>
-        <Text style={styles.textoBloco}>Valor Gasolina</Text>
+        <Text style={styles.textoBloco}> Digite o valor da Gasolina: </Text>
         <TextInput 
           style={styles.input}
           keyboardType="numeric"
@@ -42,13 +53,16 @@ export default function App() {
       <View style={styles.bloco}>
         <TouchableOpacity 
           style={styles.botao1}
-          onPress={calcular}
+          onPress={dividir}
         >
-            <Text style={styles.textoBotao1}>Confirmar</Text>
+            <Text style={styles.textoBotao1}>Calcular</Text>
         </TouchableOpacity>
       </View>
+
+     
       <View style={styles.bloco}>
         <Text style={styles.textoBloco}>Resultado: {resultado}</Text>
+        <Text style={styles.textoBloco}>{mensagem}</Text>
       </View>
     </View>
   );
@@ -57,7 +71,7 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#FFFAF0',
+    backgroundColor: '#DA70D6',
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -80,16 +94,18 @@ const styles = StyleSheet.create({
     marginTop:30
   },
   botao1:{
-    backgroundColor:'#F4A460',
+    backgroundColor:'#8B008B',
     width:'80%',
     textAlign:'center'
   },
+  
   textoBotao1:{
     color:"#fff",
     fontSize:30
-  },
+ 
+  }, 
   logo:{
-    width:70,
-    height:70
+    width:80,
+    height:80
   }
 });
